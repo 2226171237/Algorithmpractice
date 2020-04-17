@@ -61,18 +61,20 @@ class Solution:
         hashmap=dict()
         begin,end=0,0
         maxLens=0
+        Lens=0
         while end<len(s):
-            if s[end] not in hashmap:
-                hashmap[s[end]]=end
-            if s[end] in hashmap and hashmap[s[end]]>=begin:
-                maxLens = max(maxLens,end-begin)
-                begin=hashmap[s[end]]+1
+            if s[end]  in hashmap and hashmap[s[end]]>=begin:  #在窗口内有重复
+                begin = hashmap[s[end]] + 1
+                Lens = end-begin  # 这个Lens 是少加了1的，在下面有加回来了，更新新窗口的初始长度
+            hashmap[s[end]]=end  # 更新已遍历元素的索引
             end+=1
+            Lens+=1  # 对窗口长度进行累加
+            maxLens=max(Lens,maxLens)
         return maxLens
 
 if __name__ == '__main__':
     S=Solution()
-    print(S.lengthOfLongestSubstring1('pwwkew'))
-    print(S.lengthOfLongestSubstring2('pwwkew'))
+    print(S.lengthOfLongestSubstring1('pwwkewf'))
+    print(S.lengthOfLongestSubstring2('pwwkewf'))
 
 
