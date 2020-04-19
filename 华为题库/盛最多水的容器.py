@@ -17,7 +17,37 @@
 class Solution:
     def maxArea(self, height) -> int:
         '''
-
+        参考，柱状图中最大矩形，暴力搜素,超时
         :param list[int] height:
         :return: int
         '''
+        maxArea=0
+        for i in range(len(height)):
+            for j in range(i+1,len(height)):
+                maxArea=max(maxArea,min(height[i],height[j])*(j-i))
+        return maxArea
+
+    def maxArea2(self, height) -> int:
+        '''
+        双指针法，
+        :param list[int] height:
+        :return: int
+        '''
+        left,right=0,len(height)-1
+        maxArea=0
+        while left<right:
+            maxArea=max(maxArea,min(height[left],height[right])*(right-left))
+            if height[left]<height[right]:
+                left+=1
+            else:
+                right-=1
+        return maxArea
+
+
+
+
+if __name__ == '__main__':
+    S=Solution()
+    print(S.maxArea([1,8,6,2,5,4,8,3,7]))
+    print(S.maxArea2([1, 8, 6, 2, 5, 4, 8, 3, 7]))
+
