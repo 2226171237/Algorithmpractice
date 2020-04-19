@@ -32,3 +32,26 @@ class Solution:
         :param chars:
         :return:
         '''
+        flags=[0 for _ in range(26)]
+        for ch in chars:
+            flags[ord(ch)-ord('a')]+=1
+
+        MaxLens=0
+        for word in words:
+            flag_copy=flags.copy()
+            isLearned=True
+            for w in word:
+                if flag_copy[ord(w)-ord('a')]>0:
+                    flag_copy[ord(w) - ord('a')]-=1
+                else:
+                    isLearned=False
+            if isLearned:
+                MaxLens+=len(word)
+
+        return MaxLens
+
+if __name__ == '__main__':
+    S=Solution()
+    print(S.countCharacters(words = ["hello","world","leetcode"], chars = "welldonehoneyr"))
+
+
