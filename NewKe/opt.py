@@ -74,7 +74,7 @@ def jisuan(postOrder):
                 S.push(b-a)
             elif '*'==ch:
                 S.push(a*b)
-            elif '/'==ch:
+            elif '/'==ch: 
                 S.push(b/a)
     return S.peek()
 
