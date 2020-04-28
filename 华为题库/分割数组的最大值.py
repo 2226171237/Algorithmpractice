@@ -26,9 +26,35 @@ m = 2
 class Solution:
     def splitArray(self, nums, m: int) -> int:
         '''
-
+        二分查找
         :param list[int] nums:
         :param m:
         :return:
         '''
+        # 初始化：left为最大数,right为综合
+        left,right=0,0
+        for x in nums:
+            right+=x
+            if left<x:
+                left=x
+
+        while left<right:
+            mid=(left+right)//2
+            cnt=1
+            sum=0
+            for x in nums:
+                if x+sum>mid: # 分割一个新的数组
+                    cnt+=1
+                    sum=x
+                else:
+                    sum+=x
+            if cnt<=m:  # 可在减小
+                right=mid
+            else: # 小了，要增大
+                left=mid+1
+        return left
+
+if __name__ == '__main__':
+    S=Solution()
+    print(S.splitArray([7,2,5,10,8],2))
 
