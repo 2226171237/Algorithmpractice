@@ -31,7 +31,7 @@ class Solution:
         :param m:
         :return:
         '''
-        # 初始化：left为最大数,right为综合
+        # 初始化：left为最大数,right为总和
         left,right=0,0
         for x in nums:
             right+=x
