@@ -24,17 +24,13 @@ def select_sort1(X):
     return X
 
 def select_sort2(X):
-    i=0
     n=len(X)
-    while i<n-1:
-        j=i+1
-        while j<n:
+    for i in range(n-1):
+        for j in range(i+1,n):
             if X[i]>X[j]:
                 t=X[i]
                 X[i]=X[j]
                 X[j]=t
-            j+=1
-        i+=1
     return X
 
 if __name__ == '__main__':

@@ -20,6 +20,8 @@ def qsort(X,low,high):
     qsort(X,low,mid-1)
     qsort(X,mid+1,high)
 
+
+
 if __name__ == '__main__':
     import random
 
