@@ -31,3 +31,4 @@ def solver(N):
         print()
 
 solver(8)
+
