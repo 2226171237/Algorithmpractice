@@ -29,46 +29,29 @@ class Solution:
         '''
         def f(x):
             return a*x*x+b*x+c
-        if a==0:
-            return [f(x) for x in nums]
-        elif a<0:
+        if len(nums)==0:
+            return []
+        if a==0: # 直线
+            sign=1 if b>0 else -1
+            return [f(x) for x in nums[::sign]]
+        else:
             left,right=0,len(nums)-1
-            result=[]
-            while left<=right:
-                x1= f(nums[left])
-                x2=f(nums[right])
+            index=0 if a<0 else right
+            sign=1 if a<0 else -1
+            result=[0 for _ in range(len(nums))]
+            while left<=right and index>=0:
+                x1= f(nums[left])*sign
+                x2=f(nums[right])*sign
                 if x1>x2:
-                    result.append(x2)
+                    result[index]=x2*sign
+                    index+=sign
                     right-=1
                 else:
-                    result.append(x1)
+                    result[index]=x1*sign
+                    index+=sign
                     left+=1
             return result
-        else:
-            result=[]
-            mid_x=-b/(2*a)
-            mid_i=0
-            for i in range(len(nums)):
-                if mid_x-nums[i]>=0:
-                    mid_i=i
-            left,right=mid_i,mid_i+1
-            while 0>=left and right<len(nums):
-                x1 = f(nums[left])
-                x2 = f(nums[right])
-                if x1>x2:
-                    result.append(x2)
-                    right+=1
-                else:
-                    result.append(x1)
-                    left-=1
 
-            while left>=0:
-                result.append(f(nums[left]))
-                left-=1
-            while right<len(nums):
-                result.append(f(nums[right]))
-                right += 1
-            return result
 if __name__ == '__main__':
     S=Solution()
-    print(S.sortTransformedArray([-4,-2,2,4],1,3,5))
+    print(S.sortTransformedArray([-4,-2,2,4],0,-1,5))
