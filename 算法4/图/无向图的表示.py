@@ -310,7 +310,7 @@ if __name__ == '__main__':
     c = CC(G)
     print(c.ids)
 
-    sygraph=SymbolGraph('movies.txt',',')
+    sygraph=SymbolGraph('data/movies.txt', ',')
     print(sygraph)
     twocolor=TwoColor(sygraph)
     print(twocolor.isBipartite())
