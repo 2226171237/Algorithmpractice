@@ -91,12 +91,14 @@ class SymbolDigraph(Digraph):
         return S
 
 class DirectDFS:
-    '''单点有向路径'''
+    '''多点可达有向路径'''
     def __init__(self,G:Digraph,s):
-        self.s=s
+        self.s=s if isinstance(s,(list,tuple)) else [s]
         self.marked=[False for _ in range(G.V())]
         self.paths = [False for _ in range(G.V())]
-        self._dfs(G,s)
+        for v in s:
+            if not self.marked[v]:
+                self._dfs(G,v)
 
     def _dfs(self,G:Digraph,s):
         self.marked[s]=True
