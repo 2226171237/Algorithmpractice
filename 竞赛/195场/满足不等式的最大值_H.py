@@ -20,7 +20,7 @@ from collections import deque
 class Solution(object):
     def findMaxValueOfEquation(self, points, k):
         """
-        yi + yj + xj - xi=xj+yj+(yi-xi)
+        yi + yj + xj - xi=xj+yj+(yi-xi),单调队列
         :type points: List[List[int]]
         :type k: int
         :rtype: int
@@ -33,6 +33,7 @@ class Solution(object):
                 Q.popleft()
             if len(Q):
                 ans=max(ans,points[i][0]+points[i][1]+Q[0])
+            # 入队
             while len(Q) and Q[-1][1]<=points[i][1]-points[i][0]:
                 Q.pop()
             Q.append((points[i][0],points[i][1]-points[i][0]))
