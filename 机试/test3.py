@@ -1,3 +1,7 @@
+'''
+
+'''
+
 import sys
 
 K=int(sys.stdin.readline().strip())
@@ -27,6 +31,7 @@ for _ in range(R):
     G.buildGraph(*line)
 
 def DFS(G:Graph,maxCost:int,N):
+    '''最大成本条件下，找到最短路径长度'''
     minLens=[2**31]
     visited=[False for _ in range(N)]
     def dfs(v,lens:int,cost):
@@ -47,12 +52,10 @@ def DFS(G:Graph,maxCost:int,N):
 print(DFS(G,K,N))
 
 
-
-
 '''
-5
-6
-7
+5  K  maxCost
+6  N
+7  R
 1 2 2 4
 2 4 3 3
 3 4 2 4

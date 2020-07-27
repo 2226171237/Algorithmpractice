@@ -61,6 +61,53 @@ class Solution:
             print(p)
         return P[-1][-1]
 
+
+
+def getEndwithDelCnt(s,p):
+    '''
+    至少删除多少字符才能使p成为s的后缀
+    :param s:
+    :param p:
+    :return:
+    '''
+    cnt=0
+    i=len(s)-1
+    j = len(p) - 1
+    while i>=0 and j>=0:
+        if s[i]==p[j]:
+            i-=1
+            j-=1
+        else:
+            i-=1
+            cnt+=1
+    return 2**31 if j>=0 else cnt
+
+def getLeastCnt(s,p):
+    lenS=len(s)
+    lenP=len(p)
+    # P[i,j] 表示为p_j 为s_i的子串，s_i至少要删除多少个字符
+    P=[[2**31 for _ in range(lenP)] for _ in range(lenS)]
+    # 第一列初始化，p_0 在s中 则不删除=0，否则不成功=2**31
+    if p[0] in s:
+        i=0
+        while i<lenS:
+            if s[i]==p[0]:
+                break
+            i+=1
+        for ii in range(i,lenS):
+            P[ii][0]=0
+    # 第一列初始化全为2**31
+    for i in range(1,lenS):
+        for j in range(1,lenP):
+            if s[i]==p[j]:
+                del_cnt=getEndwithDelCnt(s[:i],p[:j])
+                P[i][j]=min(P[i-1][j],del_cnt)
+            else:
+                P[i][j]=P[i-1][j]
+    return -1 if P[-1][-1]==2**31 else P[-1][-1]
+
+
 if __name__ == '__main__':
     S=Solution()
-    print(S.getLeastCnt('xbxc','bc'))
+    # print(S.getLeastCnt('xbxc','bc'))
+    print(getLeastCnt('a'*2**10,'a'*2**6))

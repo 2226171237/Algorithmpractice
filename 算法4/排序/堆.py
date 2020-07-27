@@ -61,6 +61,7 @@ class HeapSort(BasicSort):
                 child_idx=current_idx*2
             else:
                 break
+
     def sort(self,arr):
         N=len(arr)
         for i in range(N//2,0,-1):
@@ -87,6 +88,5 @@ if __name__ == '__main__':
     s.sort(x)
     print(x)
     s.check()
-
 
 

@@ -1,23 +1,6 @@
-import sys
-
-# string=sys.stdin.readline().strip()
-# string=list(string)
-# result=[0]
-# def permuite(string:str,i:int,path:list):
-#     if i>len(string):
-#         return
-#     if i==len(string):
-#         result[0]+=1
-#     for j in range(i,len(string)):
-#         string[i],string[j]=string[j],string[i]
-#         path.append(string[i])
-#         permuite(string,i+1,path)
-#         path.pop()
-#         string[i], string[j] = string[j], string[i]
-#
-# permuite(string,0,[])
-# print(result[0])
-
+'''
+有重复元素的字符串的排列问题
+'''
 
 def getone(string:list):
     i=len(string)-1
@@ -91,3 +74,48 @@ class Solution:
 
 S=Solution()
 print(S.permutation('qqe'))
+
+
+# def getOne(s):
+#     i=len(s)-1
+#     j=len(s)-2
+#     while j>=0:
+#         if s[i]<=s[j]:
+#             i-=1
+#             j-=1
+#         else:
+#             break
+#     return j if j>=0 else -1
+#
+# def getTwo(s,i):
+#     k=i+1
+#     mins=s[i+1]
+#     for j in range(i+2,len(s)):
+#         if s[j]>s[i] and s[j]<=mins:
+#             k=j
+#             mins=s[j]
+#     return  k
+# def reversed(s,low,high):
+#     while low<high:
+#         s[low],s[high]=s[high],s[low]
+#         low+=1
+#         high-=1
+#
+# class Solution(object):
+#     def permutation(self, s):
+#         """
+#         :type s: str
+#         :rtype: List[str]
+#         """
+#         s=sorted(list(s))
+#         result=[''.join(s)]
+#         while True:
+#             i=getOne(s)
+#             if i<0:
+#                 break
+#             else:
+#                 k=getTwo(s,i)
+#                 s[i],s[k]=s[k],s[i]
+#                 reversed(s,i+1,len(s)-1)
+#                 result.append(''.join(s))
+#         return result

@@ -38,7 +38,7 @@ class MergeSort(BasicSort):
         '''
         n=len(arr)
         self.arr_aux=arr.copy()
-        size=1
+        size=1  # 代表子序的长度
         while size<n:
             i=0
             while i<n-1:
@@ -49,3 +49,22 @@ class MergeSort(BasicSort):
 if __name__ == '__main__':
     s=MergeSort()
     s.check()
+
+    # arr_cpy=[]
+    # def merge(arr,low,mid,high):
+    #     arr_cpy[low:high+1]=arr[low:high+1]
+    #     i=low
+    #     j=mid+1
+    #     for k in range(low,high+1):
+    #         if i>mid:
+    #             arr[k]=arr_cpy[j]
+    #             j+=1
+    #         elif j>high:
+    #             arr[k]=arr_cpy[i]
+    #             i+=1
+    #         elif arr_cpy[i]>arr_cpy[j]:
+    #             arr[k]=arr_cpy[j]
+    #             j+=1
+    #         else:
+    #             arr[k]=arr_cpy[i]
+    #             i+=1
