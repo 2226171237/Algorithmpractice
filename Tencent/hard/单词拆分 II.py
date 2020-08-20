@@ -40,6 +40,7 @@ wordDict = ["cats", "dog", "sand", "and", "cat"]
 class Solution(object):
     def wordBreak(self, s, wordDict):
         """
+        记忆化+回溯
         :type s: str
         :type wordDict: List[str]
         :rtype: List[str]
@@ -48,20 +49,31 @@ class Solution(object):
         for word in wordDict:
             d.add(word)
         result=[]
-
+        mem=dict()
         def dfs(s,path):
+            if s in mem:
+                for t in mem[s]:
+                    if t.endswith('ok') and len(t)>2:
+                        result.append(' '.join(path)+' '+t[:-3])
+                return mem[s]
             if 0==len(s):
                 result.append(' '.join(path))
-                return
+                return ["ok"]
+            res=[]
             for i in range(len(s)):
                 word=s[:i+1]
                 if word in d:
                     path.append(word)
-                    dfs(s[i+1:],path)
+                    tmp=dfs(s[i+1:],path)
+                    for t in tmp:
+                        if t.endswith('ok'):
+                            res.append(word+' '+t)
                     path.pop()
+            mem[s]=res[:]
+            return res
         dfs(s,[])
         return result
 
 if __name__ == '__main__':
     s=Solution()
-    print(s.wordBreak("pineapplepenapple",["apple", "pen", "applepen", "pine", "pineapple"]))
+    print(s.wordBreak("catsanddog",["cat","cats","and","sand","dog"]))
