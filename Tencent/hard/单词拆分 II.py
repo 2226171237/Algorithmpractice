@@ -54,7 +54,7 @@ class Solution(object):
             if s in mem:
                 for t in mem[s]:
                     if t.endswith('ok') and len(t)>2:
-                        result.append(' '.join(path)+' '+t[:-3])
+                        result.append(' '.join(path)+' '+t[:-3]) # 因为还有一个空格
                 return mem[s]
             if 0==len(s):
                 result.append(' '.join(path))
